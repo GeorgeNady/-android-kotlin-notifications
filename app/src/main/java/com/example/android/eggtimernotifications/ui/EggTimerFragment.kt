@@ -34,21 +34,18 @@ import com.google.firebase.messaging.FirebaseMessaging
 
 class EggTimerFragment : Fragment() {
 
-    private val TOPIC = "breakfast"
+    private val binding by lazy { FragmentEggTimerBinding.inflate(layoutInflater) }
+    private val viewModel by lazy { ViewModelProvider(this).get(EggTimerViewModel::class.java) }
+    val TOPIC = "breakfast"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        val binding: FragmentEggTimerBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_egg_timer, container, false
-        )
-
-        val viewModel = ViewModelProvider(this).get(EggTimerViewModel::class.java)
-
-        binding.eggTimerViewModel = viewModel
-        binding.lifecycleOwner = this.viewLifecycleOwner
+    ): View {
+        with(binding) {
+            lifecycleOwner = this@EggTimerFragment.viewLifecycleOwner
+            eggTimerViewModel = viewModel
+        }
 
         // TODO: Step 1.7 call create channel
 

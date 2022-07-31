@@ -35,7 +35,8 @@ private val FLAGS = 0
 /**
  * Builds and delivers the notification.
  *
- * @param context, activity context.
+ * @param applicationContext
+ * @param messageBody
  */
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
     // Create the content intent for the notification, which launches
@@ -50,10 +51,18 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
     // TODO: Step 1.2 get an instance of NotificationCompat.Builder
     // Build the notification
+    val notificationCompat = NotificationCompat.Builder(
+        applicationContext,
+        applicationContext.getString(R.string.egg_notification_channel_id)
+    )
 
     // TODO: Step 1.8 use the new 'breakfast' notification channel
 
     // TODO: Step 1.3 set title, text and icon to builder
+        .setSmallIcon(R.drawable.egg_icon)
+        .setContentTitle(applicationContext.getString(R.string.notification_title))
+        .setContentText(messageBody)
+        .setPriority(NotificationCompat.PRIORITY_MAX)
 
     // TODO: Step 1.13 set content intent
 
@@ -64,7 +73,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         // TODO: Step 2.5 set priority
 
     // TODO: Step 1.4 call notify
-
+    notify(NOTIFICATION_ID, notificationCompat.build())
 }
 
 // TODO: Step 1.14 Cancel all notifications
