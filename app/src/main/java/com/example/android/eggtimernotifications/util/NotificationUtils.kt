@@ -28,6 +28,7 @@ import com.example.android.eggtimernotifications.receiver.SnoozeReceiver
 
 // Notification ID.
 private val NOTIFICATION_ID = 0
+private var MUTABLE_NOTIFICATION_ID = 0
 private val REQUEST_CODE = 0
 private val FLAGS = 0
 
@@ -73,7 +74,8 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         // TODO: Step 2.5 set priority
 
     // TODO: Step 1.4 call notify
-    notify(NOTIFICATION_ID, notificationCompat.build())
+    notify(MUTABLE_NOTIFICATION_ID, notificationCompat.build())
+    MUTABLE_NOTIFICATION_ID++
 }
 
 // TODO: Step 1.14 Cancel all notifications
